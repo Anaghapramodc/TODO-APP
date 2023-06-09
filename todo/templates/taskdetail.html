@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+         button {
+  background-color: lightblue; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 50%;
+  text-align: right;
+}
+    </style>
+</head>
+<body style="background-COLOR: WHITE;background-repeat: no-repeat;background-size: cover;">
+ <a href="{% url 'home' %}" > <button   type="submit" style="color:BLACK "> TODO </a> </button>
+<div class="card-body" style="width: 30%; margin-left: 35%; margin-top: 5%;">
+<!--    <center><h1>Task Details</h1></center>-->
+    <form action="" method="post" style="background-color: WHITE;padding: 110px;border: 5px solid RED; ">
+        <center>
+        <h2>Task: {{task}}</h2>
+  {% if task.completed %} completed {% else %} pending {% endif %}
+            <p><a href="{% url 'task' %}"> Go Back</a></p>
+        </center>
+    </form>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>javascript basics</h1>
+    <p id="sample"></p>
+    <p id="demo"></p>
+    <script>
+        let a=[5,2,4,3,7]
+        let even=[]
+        let odd=[]
+        for(i=0;i<a.length;i++){
+            if (a[i]%2==0){
+                even.push(a[i])
+
+            }
+            else{
+                odd.push(a[i])
+
+            }
+        }
+    console.log('even num:',even)
+    console.log('odd num:',odd)
+
+
+
+
+
+
+        let x = 3;
+        let y = 5;
+        let z = x + y;
+        function myfunction(p, q) {
+            return p * q;
+
+        }
+        let result = myfunction(4, 3);
+        document.getElementById("demo").innerHTML = "result: " + result;
+    document.getElementById("sample").innerHTML="The value of z is:"+z;
+
+
+    var num=7
+var isprime=true
+for(let i=2;i<num;i++)
+{
+    if (num%i==0){
+        isprime=false
+    }
+}
+console.log(isprime)
+
+
+var num=10
+for(let i=0;i<=10;i++){
+    console.log(i)
+}
+
+
+const number=prompt("enter the number");
+
+// var num=13
+var isprime='odd'
+    if (number%2==0){
+        isprime='even'
+    }
+
+console.log(isprime)
+
+class person{
+    constructor(name,age){
+        this.name=name  
+        this.age=age
+    }
+    printperson(){
+        console.log(this.name,this.age);
+    }
+}
+class model extends person{
+    constructor(brand,mod){
+        super(brand)
+        this.model=mod;
+    }
+    show(){
+        return this.printperson()+',it is a'+this.model;
+    }
+}
+var p1=new model('ford','5')
+var p1=new person('jin',21)
+p1.printperson()
+
+    </script>
+    <script src="/jsprogram"></script>
+
+</body>
+
+</html>

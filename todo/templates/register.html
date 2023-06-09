@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    .input[type="text"]{
+    outline:0;
+    width:100%;
+    margin-right:10px;
+
+
+    }
+      button {
+  background-color: lightblue; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 50%;
+  text-align: right;
+}
+</style>
+</head>
+<body style="background-image: url('{% static 'img_2.png' %}');background-repeat: no-repeat;background-size: 1600PX 800PX;">
+ <a href="{% url 'home' %}" > <button   type="submit" style="color:BLACK "> TODO </a> </button>
+
+
+<div class="card-body" style="width: 40%; margin-left: 2%; margin-top: 10%;">
+    <form action="" method="post" style="background-color: lightblue;padding: 59px;border: 1px solid white; ">
+        <center>
+        <h1 style="color:red;">Register </h1>
+            </center>
+       {% csrf_token %}
+        <label>{{form.username.label}}</label>
+        {{form.username}}
+        <p>
+       <label class="form-label">{{form.password1.label}}</label>{{form.password1}} &nbsp;
+          <label class="form-label">{{form.passwrod2.label}}</label>{{form.password2}}
+
+            <p>
+        <input class="button" type="submit" value="'Register" style="margin-left: 16%; margin-top: 2%">
+            <p>Aldredy have an account? <a href ="{% url 'login'%}">Login </a></p>
+    </form>
+</div>
+
+</body>
+
+</html>
