@@ -6,6 +6,7 @@ from .views import TaskList, TaskCreate, TaskDelete, TaskDetailView, TaskUpdate,
     CustomLogoutView, HomeView
 
 urlpatterns = [
+    path('send_email/',views.send_test_email,name = 'send_mail'),
     # path('', views.home, name='home'),
     path('',HomeView.as_view(),name='home'),
     path('login/',CustomLoginView.as_view(),name='login'),

@@ -7,9 +7,20 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView, FormView, TemplateView
 from .models import task
+from django.core.mail import send_mail
+from django.http import HttpResponse
 
 
 # Create your views here.
+
+
+def send_test_email(request):
+    subject = "Hi welcome to Django email configuration session"
+    message = "This is the tset email send using django"
+    from_email = 'anaghapramodc60@gmail.com'
+    recipient_list = ['anaghapramod916@gmail.com']
+    send_mail(subject, message, from_email, recipient_list)
+    return HttpResponse('Test mail sent successfully...!')
 
 
 # def home(request):
@@ -23,6 +34,7 @@ class HomeView(TemplateView):
         # Add any additional context variables here
         return context
 
+
 class CustomLoginView(LoginView):
     template_name = 'login.html'
     fields = '--all--'
@@ -31,43 +43,39 @@ class CustomLoginView(LoginView):
     def get_success_url(self):
         return reverse_lazy('task')
 
+
 class RegisterView(FormView):
     template_name = 'register.html'
     form_class = UserCreationForm
     redirect_authenticated_user = True
     success_url = reverse_lazy('task')
 
-    def form_valid(self,form):
+    def form_valid(self, form):
         user = form.save()
         if user is not None:
-            login(self.request,user)
-            return super(RegisterView,self).form_valid(form)
+            login(self.request, user)
+            return super(RegisterView, self).form_valid(form)
 
-    def get(self,*args,**kwargs):
+    def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
             return redirect('task')
-        return super(RegisterView,self).get(*args,**kwargs)
-
-
+        return super(RegisterView, self).get(*args, **kwargs)
 
 
 class CustomLogoutView(LogoutView):
     template_name = 'logout.html'
     next_page = reverse_lazy('home')
 
-    def dispatch(self,request,*args,**kwargs):
-        return super().dispatch(request,*args,**kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
 
-
-
-
-
-class TaskList(LoginRequiredMixin,ListView):
+class TaskList(LoginRequiredMixin, ListView):
     model = task
     context_object_name = 'task'
     template_name = 'list.html'
-    def get_context_data(self,**kwargs):
+
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['task'] = context['task'].filter(user=self.request.user)
         context['count'] = context['task'].filter(completed=False).count()
@@ -75,35 +83,31 @@ class TaskList(LoginRequiredMixin,ListView):
         return context
 
 
-
-
-class TaskCreate(LoginRequiredMixin,CreateView):
+class TaskCreate(LoginRequiredMixin, CreateView):
     model = task
-    fields = ['title','description','completed']
+    fields = ['title', 'description', 'completed']
     success_url = reverse_lazy('task-create')
     template_name = 'taskcreate.html'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(TaskCreate,self).form_valid(form)
+        return super(TaskCreate, self).form_valid(form)
 
 
-class TaskUpdate(LoginRequiredMixin,UpdateView):
+class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = task
-    fields = ['title','description','completed']
+    fields = ['title', 'description', 'completed']
     success_url = reverse_lazy('task')
     template_name = 'taskcreate.html'
 
 
-class TaskDelete(LoginRequiredMixin,DeleteView):
+class TaskDelete(LoginRequiredMixin, DeleteView):
     model = task
     fields = ['title', 'description', 'completed']
     success_url = reverse_lazy('task')
     template_name = 'taskdelete.html'
 
-class TaskDetailView(LoginRequiredMixin,DetailView):
+
+class TaskDetailView(LoginRequiredMixin, DetailView):
     model = task
     template_name = 'taskdetail.html'
-
-
-
